@@ -1769,7 +1769,7 @@ static boolean CL_ServerConnectionTicker(const char *tmpsave, tic_t *oldtic, tic
 			
 			if (totalfiles > ADDONSCROLLLIMIT)
 			{
-				if (gamekeydown[KEY_DOWNARROW] || JoyAxis(JA_MOVE) < 0 || gamekeydown[KEY_HAT1+1])
+				if (gamekeydown[KEY_DOWNARROW] || JoyAxis(JA_MOVE) > 0 || gamekeydown[KEY_HAT1+1])
 				{
 					if (viewfiles != (totalfiles - ADDONSCROLLLIMIT))
 					{
@@ -1781,7 +1781,7 @@ static boolean CL_ServerConnectionTicker(const char *tmpsave, tic_t *oldtic, tic
 						viewfiles = totalfiles - ADDONSCROLLLIMIT;
 				}
 
-				if (gamekeydown[KEY_UPARROW] || JoyAxis(JA_MOVE) > 0 || gamekeydown[KEY_HAT1])
+				if (gamekeydown[KEY_UPARROW] || JoyAxis(JA_MOVE) < 0 || gamekeydown[KEY_HAT1])
 				{
 					if (viewfiles)
 					{
