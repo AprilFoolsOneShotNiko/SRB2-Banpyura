@@ -1758,7 +1758,7 @@ static boolean CL_ServerConnectionTicker(const char *tmpsave, tic_t *oldtic, tic
 				}
 				else
 				{
-					cl_mode = CL_LOADFILES;
+					DoLoadFiles();
 				}
 				S_StartSound(NULL, sfx_menu1);
 			}
