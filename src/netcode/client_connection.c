@@ -1749,7 +1749,7 @@ static boolean CL_ServerConnectionTicker(const char *tmpsave, tic_t *oldtic, tic
 				if (fileneeded[i].status == FS_NOTFOUND || fileneeded[i].status == FS_MD5SUMBAD)
 					totalfiles++;
 
-			if (gamekeydown[KEY_ENTER])
+			if (gamekeydown[KEY_ENTER] || gamekeydown[KEY_JOY1])
 			{
 				if (totalfiles > 0)
 				{
@@ -1761,14 +1761,14 @@ static boolean CL_ServerConnectionTicker(const char *tmpsave, tic_t *oldtic, tic
 				}
 				S_StartSound(NULL, sfx_menu1);
 			}
-			else if (gamekeydown[KEY_ESCAPE])
+			else if (gamekeydown[KEY_ESCAPE] || gamekeydown[KEY_JOY1+1])
 			{
 				cl_mode = CL_ABORTED;
 			}
 			
 			if (totalfiles > ADDONSCROLLLIMIT)
 			{
-				if (gamekeydown[KEY_DOWNARROW])
+				if (gamekeydown[KEY_DOWNARROW] || JoyAxis(JA_MOVE) < 0 || gamekeydown[KEY_HAT1+1])
 				{
 					if (viewfiles != (totalfiles - ADDONSCROLLLIMIT))
 					{
@@ -1780,7 +1780,7 @@ static boolean CL_ServerConnectionTicker(const char *tmpsave, tic_t *oldtic, tic
 						viewfiles = totalfiles - ADDONSCROLLLIMIT;
 				}
 
-				if (gamekeydown[KEY_UPARROW])
+				if (gamekeydown[KEY_UPARROW] || JoyAxis(JA_MOVE) > 0 || gamekeydown[KEY_HAT1])
 				{
 					if (viewfiles)
 					{
@@ -1797,16 +1797,16 @@ static boolean CL_ServerConnectionTicker(const char *tmpsave, tic_t *oldtic, tic
 		// key handler for server info
 		if (cl_mode == CL_VIEWSERVER)
 		{
-			if (gamekeydown[KEY_ENTER])
+			if (gamekeydown[KEY_ENTER] || gamekeydown[KEY_JOY1])
 			{
 				cl_mode = CL_CHECKFILES;
 				S_StartSound(NULL, sfx_menu1);
 			}
 
-			if (gamekeydown[KEY_ESCAPE])
+			if (gamekeydown[KEY_ESCAPE] || gamekeydown[KEY_JOY1+1])
 				cl_mode = CL_ABORTED;
 
-			if (gamekeydown[KEY_SPACE])
+			if (gamekeydown[KEY_SPACE] || gamekeydown[KEY_JOY1+2])
 			{
 				if (fileneedednum > 0)
 				{
@@ -1825,7 +1825,7 @@ static boolean CL_ServerConnectionTicker(const char *tmpsave, tic_t *oldtic, tic
 
 			if (viewserver_addons && (fileneedednum > MAXLISTADDONS))
 			{
-				if (gamekeydown[KEY_DOWNARROW])
+				if (gamekeydown[KEY_DOWNARROW] || JoyAxis(JA_MOVE) > 0 || gamekeydown[KEY_HAT1+1])
 				{
 					if (viewserver_scroll != (fileneedednum - ADDONSCROLLLIMIT))
 					{
@@ -1836,7 +1836,7 @@ static boolean CL_ServerConnectionTicker(const char *tmpsave, tic_t *oldtic, tic
 					if (viewserver_scroll > (fileneedednum - ADDONSCROLLLIMIT))
 						viewserver_scroll = (fileneedednum - ADDONSCROLLLIMIT);
 				}
-				else if (gamekeydown[KEY_UPARROW])
+				else if (gamekeydown[KEY_UPARROW] || JoyAxis(JA_MOVE) < 0 || gamekeydown[KEY_HAT1])
 				{
 					if (viewserver_scroll)
 					{
