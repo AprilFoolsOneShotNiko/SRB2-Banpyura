@@ -1754,6 +1754,7 @@ static boolean CL_ServerConnectionTicker(const char *tmpsave, tic_t *oldtic, tic
 				if (totalfiles > 0)
 				{
 					BeginDownload(UseDirectDownloader());
+					gamekeydown[KEY_ENTER] = false;
 				}
 				else
 				{
