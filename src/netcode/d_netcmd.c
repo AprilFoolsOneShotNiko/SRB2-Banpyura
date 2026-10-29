@@ -2425,7 +2425,10 @@ static void Got_Clearscores(UINT8 **cp, INT32 playernum)
 	for (i = 0; i < MAXPLAYERS; i++)
 		players[i].score = players[i].recordscore = 0;
 
-	CONS_Printf(M_GetText("Scores have been reset by the server.\n"));
+	if (playernum == serverplayer)
+		CONS_Printf(M_GetText("Scores have been reset by the server.\n"));
+	else
+		CONS_Printf(M_GetText("Scores have been reset by %s.\n"), player_names[playernum]);
 }
 
 // Team changing functions
@@ -3853,6 +3856,8 @@ static void Got_RequestAddfilecmd(UINT8 **cp, INT32 playernum)
 	READSTRINGN(*cp, filename, 240);
 	READMEM(*cp, md5sum, 16);
 
+	CONS_Alert(CONS_NOTICE, M_GetText("Addfile command request received from %s, file %s\n"), player_names[playernum], filename);
+
 	// Only the server processes this message.
 	if (client)
 		return;
@@ -3908,6 +3913,8 @@ static void Got_RequestAddfoldercmd(UINT8 **cp, INT32 playernum)
 	INT32 i,j;
 
 	READSTRINGN(*cp, path, 240);
+
+	CONS_Alert(CONS_NOTICE, "Addfolder command request received from %s, path %s\n", player_names[playernum], path);
 
 	/// \todo Integrity checks.
 
