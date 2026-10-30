@@ -3867,7 +3867,7 @@ static void Got_RequestAddfilecmd(UINT8 **cp, INT32 playernum)
 	if (client)
 		return;
 
-	if (server && cv_allowadminaddfile.value)
+	if (server && !cv_allowadminaddfile.value)
 		return;
 
 	// Disallow non-printing characters and semicolons.
@@ -3930,7 +3930,7 @@ static void Got_RequestAddfoldercmd(UINT8 **cp, INT32 playernum)
 	if (client)
 		return;
 
-	if (server && cv_allowadminaddfile.value)
+	if (server && !cv_allowadminaddfile.value)
 		return;
 
 	// Disallow non-printing characters and semicolons.
